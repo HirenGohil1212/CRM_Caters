@@ -1,10 +1,26 @@
-import type { User, UserRole, Event, Waiter, Client, Transaction, Communication } from './types'
+import type { User, UserRole, Event, Waiter, Client, Transaction, Communication, Permissions } from './types'
 
 export const users: Record<UserRole, User> = {
   admin: { name: 'Admin User', email: 'admin@gilded.com', avatar: 'https://placehold.co/100x100.png' },
   hr: { name: 'HR Manager', email: 'hr@gilded.com', avatar: 'https://placehold.co/100x100.png' },
   accountant: { name: 'Accountant', email: 'accountant@gilded.com', avatar: 'https://placehold.co/100x100.png' },
   sales: { name: 'Sales Rep', email: 'sales@gilded.com', avatar: 'https://placehold.co/100x100.png' },
+};
+
+export const initialPermissions: Permissions = {
+  hr: { events: true, waiters: true, settings: true, clients: false, financials: false, communications: false, roles: false },
+  accountant: { events: true, clients: true, financials: true, settings: true, waiters: false, communications: false, roles: false },
+  sales: { events: true, clients: true, communications: true, settings: true, waiters: false, financials: false, roles: false },
+};
+
+export const permissionLabels: Record<keyof Permissions[keyof Permissions], string> = {
+  events: "Events",
+  waiters: "Waiters",
+  clients: "Clients",
+  financials: "Financials",
+  communications: "Communications",
+  roles: "Roles",
+  settings: "Settings",
 };
 
 export const waiters: Waiter[] = [

@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export type UserRole = 'admin' | 'hr' | 'accountant' | 'sales';
 
 export interface User {
@@ -5,6 +7,25 @@ export interface User {
   email: string;
   avatar: string;
 }
+
+export interface NavItem {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  roles: UserRole[];
+}
+
+export type Permissions = {
+  [K in Exclude<UserRole, 'admin'>]: {
+    events: boolean;
+    waiters: boolean;
+    clients: boolean;
+    financials: boolean;
+    communications: boolean;
+    settings: boolean;
+    roles: boolean;
+  }
+};
 
 export interface Event {
   id: number;
