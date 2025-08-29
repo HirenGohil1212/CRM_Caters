@@ -99,17 +99,17 @@ export default function FinancialsPage() {
 
 
     const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'Paid':
-        return 'bg-green-500/20 text-green-700 border-green-500/20'
-      case 'Pending':
-        return 'bg-yellow-500/20 text-yellow-700 border-yellow-500/20'
-      case 'Overdue':
-        return 'bg-red-500/20 text-red-700 border-red-500/20'
-      default:
-        return 'bg-gray-500/20 text-gray-700 border-gray-500/20'
-    }
-  }
+      switch (status) {
+        case 'Paid':
+          return 'bg-green-500/20 text-green-700 border-green-500/20'
+        case 'Pending':
+          return 'bg-yellow-500/20 text-yellow-700 border-yellow-500/20'
+        case 'Overdue':
+          return 'bg-red-500/20 text-red-700 border-red-500/20'
+        default:
+          return 'bg-gray-500/20 text-gray-700 border-gray-500/20'
+      }
+    };
 
   const handleGenerateBill = async () => {
     if (!selectedClientId) {
@@ -150,7 +150,7 @@ export default function FinancialsPage() {
         setInvoiceData(null);
       }
     }, 100);
-  }
+  };
   
   return (
     <div className="flex flex-col gap-6">
