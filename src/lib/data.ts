@@ -7,20 +7,23 @@ export const users: Record<UserRole, User> = {
   sales: { name: 'Sales Rep', email: 'sales@gilded.com', avatar: 'https://placehold.co/100x100.png' },
 };
 
-export const events: Event[] = [
-  { id: 1, name: "Innovate Corp Gala", client: "Innovate Corp", date: "2024-08-15", waitersRequired: 20, waitersAssigned: 18, status: "Upcoming" },
-  { id: 2, name: "Tech Solutions Summit", client: "Tech Solutions", date: "2024-08-20", waitersRequired: 15, waitersAssigned: 15, status: "Upcoming" },
-  { id: 3, name: "Artistry Unleashed", client: "Creative Minds", date: "2024-07-25", waitersRequired: 10, waitersAssigned: 10, status: "Completed" },
-  { id: 4, name: "HealthWell Conference", client: "HealthWell Inc.", date: "2024-09-01", waitersRequired: 25, waitersAssigned: 10, status: "Upcoming" },
-  { id: 5, name: "EcoVibes Charity Ball", client: "Green Earth Foundation", date: "2024-07-10", waitersRequired: 12, waitersAssigned: 12, status: "Cancelled" },
-];
-
 export const waiters: Waiter[] = [
   { id: 1, name: "Alice Johnson", email: "alice@example.com", phone: "123-456-7890", status: "Available", rating: 4.8, avatarUrl: 'https://placehold.co/40x40.png' },
   { id: 2, name: "Bob Williams", email: "bob@example.com", phone: "123-456-7891", status: "Assigned", rating: 4.5, avatarUrl: 'https://placehold.co/40x40.png' },
   { id: 3, name: "Charlie Brown", email: "charlie@example.com", phone: "123-456-7892", status: "Available", rating: 4.9, avatarUrl: 'https://placehold.co/40x40.png' },
   { id: 4, name: "Diana Miller", email: "diana@example.com", phone: "123-456-7893", status: "Unavailable", rating: 4.2, avatarUrl: 'https://placehold.co/40x40.png' },
   { id: 5, name: "Ethan Davis", email: "ethan@example.com", phone: "123-456-7894", status: "Assigned", rating: 4.7, avatarUrl: 'https://placehold.co/40x40.png' },
+  { id: 6, name: "Fiona Green", email: "fiona@example.com", phone: "123-456-7895", status: "Assigned", rating: 4.6, avatarUrl: 'https://placehold.co/40x40.png' },
+  { id: 7, name: "George King", email: "george@example.com", phone: "123-456-7896", status: "Assigned", rating: 4.9, avatarUrl: 'https://placehold.co/40x40.png' },
+  { id: 8, name: "Hannah Scott", email: "hannah@example.com", phone: "123-456-7897", status: "Assigned", rating: 4.8, avatarUrl: 'https://placehold.co/40x40.png' },
+];
+
+export const events: Event[] = [
+  { id: 1, name: "Innovate Corp Gala", client: "Innovate Corp", date: "2024-08-15", waitersRequired: 20, waitersAssigned: 5, status: "Upcoming", assignedWaiters: waiters.filter(w => [2,5,6,7,8].includes(w.id)) },
+  { id: 2, name: "Tech Solutions Summit", client: "Tech Solutions", date: "2024-08-20", waitersRequired: 15, waitersAssigned: 15, status: "Upcoming" },
+  { id: 3, name: "Artistry Unleashed", client: "Creative Minds", date: "2024-07-25", waitersRequired: 10, waitersAssigned: 10, status: "Completed" },
+  { id: 4, name: "HealthWell Conference", client: "HealthWell Inc.", date: "2024-09-01", waitersRequired: 25, waitersAssigned: 10, status: "Upcoming" },
+  { id: 5, name: "EcoVibes Charity Ball", client: "Green Earth Foundation", date: "2024-07-10", waitersRequired: 12, waitersAssigned: 12, status: "Cancelled" },
 ];
 
 export const clients: Client[] = [

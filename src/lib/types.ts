@@ -14,6 +14,7 @@ export interface Event {
   waitersRequired: number;
   waitersAssigned: number;
   status: 'Upcoming' | 'Completed' | 'Cancelled';
+  assignedWaiters?: Waiter[];
 }
 
 export interface Waiter {
