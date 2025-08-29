@@ -34,6 +34,7 @@ export interface Client {
   email: string;
   phone: string;
   status: 'Active' | 'Inactive';
+  gstNumber?: string;
 }
 
 export interface Transaction {

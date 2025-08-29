@@ -27,10 +27,10 @@ export const events: Event[] = [
 ];
 
 export const clients: Client[] = [
-  { id: 1, company: "Innovate Corp", contactName: "John Smith", email: "john@innovate.com", phone: "555-0101", status: "Active" },
-  { id: 2, company: "Tech Solutions", contactName: "Jane Doe", email: "jane@techsol.com", phone: "555-0102", status: "Active" },
+  { id: 1, company: "Innovate Corp", contactName: "John Smith", email: "john@innovate.com", phone: "555-0101", status: "Active", gstNumber: "29AAACZ1234A1Z5" },
+  { id: 2, company: "Tech Solutions", contactName: "Jane Doe", email: "jane@techsol.com", phone: "555-0102", status: "Active", gstNumber: "27BBBCZ5678B1Z5" },
   { id: 3, company: "Creative Minds", contactName: "Sam Wilson", email: "sam@creative.com", phone: "555-0103", status: "Inactive" },
-  { id: 4, company: "HealthWell Inc.", contactName: "Emily White", email: "emily@healthwell.com", phone: "555-0104", status: "Active" },
+  { id: 4, company: "HealthWell Inc.", contactName: "Emily White", email: "emily@healthwell.com", phone: "555-0104", status: "Active", gstNumber: "24AAACS9876C1Z7" },
 ];
 
 export const transactions: Transaction[] = [

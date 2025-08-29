@@ -26,12 +26,16 @@ const InvoiceTemplate = ({ client, invoiceType, invoiceNumber }: { client: Clien
 
   return (
     <div className="p-8 bg-white text-black max-w-2xl mx-auto font-sans">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-start mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">Gilded Events</h1>
           <p className="text-gray-500">123 Event Lane, Celebration City, 12345</p>
         </div>
-        <h2 className="text-3xl font-bold text-gray-700">INVOICE</h2>
+        <div className="text-right">
+          <h2 className="text-3xl font-bold text-gray-700">INVOICE</h2>
+          <p><span className="font-bold">Invoice Number:</span> INV-{invoiceNumber}</p>
+          <p><span className="font-bold">Invoice Date:</span> {new Date().toLocaleDateString()}</p>
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-4 mb-8">
         <div>
@@ -40,10 +44,9 @@ const InvoiceTemplate = ({ client, invoiceType, invoiceNumber }: { client: Clien
           <p>{client.contactName}</p>
           <p>{client.email}</p>
           <p>{client.phone}</p>
-        </div>
-        <div>
-          <p><span className="font-bold">Invoice Number:</span> INV-{invoiceNumber}</p>
-          <p><span className="font-bold">Invoice Date:</span> {new Date().toLocaleDateString()}</p>
+          {invoiceType === 'gst' && client.gstNumber && (
+            <p><span className="font-bold">GSTIN:</span> {client.gstNumber}</p>
+          )}
         </div>
       </div>
       <table className="w-full mb-8">
@@ -268,7 +271,7 @@ export default function FinancialsPage() {
       <Card>
         <CardHeader>
             <CardTitle>Recent Transactions</CardTitle>
-        </CardHeader>
+        </Header>
         <CardContent>
           <Table>
             <TableHeader>
