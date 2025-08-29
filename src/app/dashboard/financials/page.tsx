@@ -1,15 +1,24 @@
 "use client"
 
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageHeader } from "@/components/page-header";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { transactions, revenueData } from "@/lib/data";
+import { transactions, revenueData, clients } from "@/lib/data";
 import { DollarSign, TrendingUp, TrendingDown, FileText } from "lucide-react";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useToast } from "@/hooks/use-toast";
 
 export default function FinancialsPage() {
+    const [isInvoiceDialogOpen, setIsInvoiceDialogOpen] = useState(false);
+    const { toast } = useToast();
+
     const getStatusBadge = (status: string) => {
     switch (status) {
       case 'Paid':
@@ -22,11 +31,65 @@ export default function FinancialsPage() {
         return 'bg-gray-500/20 text-gray-700 border-gray-500/20'
     }
   }
+
+  const handleGenerateBill = () => {
+    // In a real application, this would trigger PDF generation and download.
+    // For now, we'll just show a success message.
+    toast({
+      title: "Bill Generated",
+      description: "The bill has been successfully generated and is ready for printing.",
+    });
+    setIsInvoiceDialogOpen(false);
+  }
   
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title="Financials" description="Track revenue, expenses, and manage invoices.">
-        <Button>Create Invoice</Button>
+        <Dialog open={isInvoiceDialogOpen} onOpenChange={setIsInvoiceDialogOpen}>
+          <DialogTrigger asChild>
+            <Button>Create Invoice</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Generate New Invoice</DialogTitle>
+              <DialogDescription>
+                Select a client and invoice type to generate a new bill.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="client">Client Company</Label>
+                <Select>
+                  <SelectTrigger id="client">
+                    <SelectValue placeholder="Select a client" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {clients.map(client => (
+                      <SelectItem key={client.id} value={client.company}>{client.company}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Invoice Type</Label>
+                <RadioGroup defaultValue="non-gst" className="flex gap-4">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="non-gst" id="r-non-gst" />
+                    <Label htmlFor="r-non-gst">Non-GST</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="gst" id="r-gst" />
+                    <Label htmlFor="r-gst">GST</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="secondary" onClick={() => setIsInvoiceDialogOpen(false)}>Cancel</Button>
+              <Button type="button" onClick={handleGenerateBill}>Generate & Print Bill</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </PageHeader>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
