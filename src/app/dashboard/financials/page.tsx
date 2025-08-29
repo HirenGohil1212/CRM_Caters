@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useRef } from "react";
@@ -86,8 +87,9 @@ const InvoiceTemplate = ({ client, invoiceType, invoiceNumber }: { client: Clien
           <p>Please make payment within 30 days.</p>
         </div>
     </div>
-  )
-}
+  );
+};
+
 
 export default function FinancialsPage() {
     const [isInvoiceDialogOpen, setIsInvoiceDialogOpen] = useState(false);
@@ -111,46 +113,46 @@ export default function FinancialsPage() {
       }
     };
 
-  const handleGenerateBill = async () => {
-    if (!selectedClientId) {
-      toast({
-        title: "Error",
-        description: "Please select a client.",
-        variant: "destructive",
-      });
-      return;
-    }
-    const client = clients.find(c => c.id.toString() === selectedClientId);
-    if (!client) return;
-
-    const invoiceNumber = transactions.length + 1;
-    const data = { client, invoiceType, invoiceNumber };
-    setInvoiceData(data);
-
-    // Allow state to update and component to render
-    setTimeout(async () => {
-      if (invoiceRef.current) {
-        const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
-        const imgData = canvas.toDataURL('image/png');
-        
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'px',
-          format: [canvas.width, canvas.height]
-        });
-        
-        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-        pdf.save(`invoice-INV-${invoiceNumber}-${client.company}.pdf`);
-
-        toast({
-          title: "Bill Generated",
-          description: "The bill has been successfully downloaded.",
-        });
-        setIsInvoiceDialogOpen(false);
-        setInvoiceData(null);
-      }
-    }, 100);
-  };
+    const handleGenerateBill = async () => {
+        if (!selectedClientId) {
+          toast({
+            title: "Error",
+            description: "Please select a client.",
+            variant: "destructive",
+          });
+          return;
+        }
+        const client = clients.find(c => c.id.toString() === selectedClientId);
+        if (!client) return;
+    
+        const invoiceNumber = transactions.length + 1;
+        const data = { client, invoiceType, invoiceNumber };
+        setInvoiceData(data);
+    
+        // Allow state to update and component to render
+        setTimeout(async () => {
+          if (invoiceRef.current) {
+            const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+            
+            const pdf = new jsPDF({
+              orientation: 'portrait',
+              unit: 'px',
+              format: [canvas.width, canvas.height]
+            });
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+            pdf.save(`invoice-INV-${invoiceNumber}-${client.company}.pdf`);
+    
+            toast({
+              title: "Bill Generated",
+              description: "The bill has been successfully downloaded.",
+            });
+            setIsInvoiceDialogOpen(false);
+            setInvoiceData(null);
+          }
+        }, 100);
+      };
   
   return (
     <div className="flex flex-col gap-6">
@@ -202,7 +204,6 @@ export default function FinancialsPage() {
         </Dialog>
       </PageHeader>
 
-      {/* Hidden Invoice for PDF Generation */}
       <div className="absolute -z-10 -left-[9999px] top-0">
           {invoiceData && <div ref={invoiceRef}><InvoiceTemplate {...invoiceData} /></div>}
       </div>
@@ -271,7 +272,7 @@ export default function FinancialsPage() {
       <Card>
         <CardHeader>
             <CardTitle>Recent Transactions</CardTitle>
-        </Header>
+        </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
@@ -298,5 +299,7 @@ export default function FinancialsPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
+
+    
