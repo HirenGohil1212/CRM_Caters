@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/user-context";
@@ -101,6 +101,11 @@ export default function LoginPage() {
             </div>
           </div>
         </CardContent>
+        <CardFooter className="flex justify-center text-sm">
+            <Link href="/portal/login" className="text-primary hover:underline">
+              Are you a client? Access the Client Portal
+            </Link>
+        </CardFooter>
       </Card>
     </div>
   );
