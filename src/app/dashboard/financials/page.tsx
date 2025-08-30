@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useRef } from "react";
@@ -273,33 +272,33 @@ export default function FinancialsPage() {
         <CardHeader>
             <CardTitle>Recent Transactions</CardTitle>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-                <TableRow>
-                <TableHead>Invoice ID</TableHead>
-                <TableHead>Client</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {transactions.map(t => (
-                    <TableRow key={t.id}>
-                        <TableCell className="font-medium">{t.invoiceId}</TableCell>
-                        <TableCell>{t.client}</TableCell>
-                        <TableCell>{t.date}</TableCell>
-                        <TableCell><Badge variant="outline" className={getStatusBadge(t.status)}>{t.status}</Badge></TableCell>
-                        <TableCell className="text-right font-mono">${t.amount.toFixed(2)}</TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                  <TableRow>
+                  <TableHead className="whitespace-nowrap">Invoice ID</TableHead>
+                  <TableHead>Client</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
+                  </TableRow>
+              </TableHeader>
+              <TableBody>
+                  {transactions.map(t => (
+                      <TableRow key={t.id}>
+                          <TableCell className="font-medium whitespace-nowrap">{t.invoiceId}</TableCell>
+                          <TableCell>{t.client}</TableCell>
+                          <TableCell>{t.date}</TableCell>
+                          <TableCell><Badge variant="outline" className={getStatusBadge(t.status)}>{t.status}</Badge></TableCell>
+                          <TableCell className="text-right font-mono">${t.amount.toFixed(2)}</TableCell>
+                      </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
-
-    

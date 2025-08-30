@@ -42,14 +42,15 @@ export default function ClientDashboardPage() {
             <CardTitle>My Events</CardTitle>
             <CardDescription>A list of all your event requests with us.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
             <Table>
             <TableHeader>
                 <TableRow>
-                <TableHead>Event Name</TableHead>
+                <TableHead className="whitespace-nowrap">Event Name</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead>Waiters Required</TableHead>
-                <TableHead>Waiters Assigned</TableHead>
+                <TableHead className="whitespace-nowrap">Waiters Required</TableHead>
+                <TableHead className="whitespace-nowrap">Waiters Assigned</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -57,7 +58,7 @@ export default function ClientDashboardPage() {
             <TableBody>
                 {clientEvents.map((event) => (
                 <TableRow key={event.id}>
-                    <TableCell className="font-medium">{event.name}</TableCell>
+                    <TableCell className="font-medium whitespace-nowrap">{event.name}</TableCell>
                     <TableCell>{event.date}</TableCell>
                     <TableCell>{event.waitersRequired}</TableCell>
                     <TableCell>{event.waitersAssigned}</TableCell>
@@ -85,6 +86,7 @@ export default function ClientDashboardPage() {
                 ))}
             </TableBody>
             </Table>
+          </div>
         </CardContent>
       </Card>
       

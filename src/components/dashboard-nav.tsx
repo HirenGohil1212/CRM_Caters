@@ -15,6 +15,7 @@ import {
 import { cn } from "@/lib/utils"
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar"
 import { useUser } from "@/contexts/user-context"
+import { useSidebar } from "@/components/ui/sidebar"
 import type { UserRole, NavItem } from "@/lib/types"
 
 const navItems: NavItem[] = [
@@ -31,6 +32,11 @@ const navItems: NavItem[] = [
 export function DashboardNav() {
   const pathname = usePathname();
   const { role, permissions } = useUser();
+  const { setOpenMobile } = useSidebar();
+
+  const handleLinkClick = () => {
+    setOpenMobile(false);
+  }
 
   const filteredNavItems = navItems.filter(item => {
     if (!item.roles.includes(role as UserRole)) {
@@ -53,7 +59,7 @@ export function DashboardNav() {
     <SidebarMenu>
       {filteredNavItems.map((item) => (
         <SidebarMenuItem key={item.href}>
-          <Link href={item.href}>
+          <Link href={item.href} onClick={handleLinkClick}>
             <SidebarMenuButton
               isActive={pathname === item.href}
               tooltip={item.label}
