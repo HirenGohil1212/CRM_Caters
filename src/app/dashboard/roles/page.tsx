@@ -40,7 +40,7 @@ export default function RolesPage() {
         title="Role Management"
         description="Control which pages each role can see in the sidebar."
       />
-      <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {(Object.keys(initialPermissions) as Array<keyof Permissions>).map((roleKey) => (
           <Card key={roleKey}>
             <CardHeader>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -21,13 +22,15 @@ import Link from "next/link"
 
 export function UserNav() {
   const { user, role, setRole } = useUser();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleRoleChange = (newRole: UserRole) => {
     setRole(newRole);
+    setMenuOpen(false);
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
@@ -58,14 +61,14 @@ export function UserNav() {
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
-          <Link href="/dashboard/settings">
-            <DropdownMenuItem>
+          <Link href="/dashboard/settings" passHref>
+            <DropdownMenuItem onClick={() => setMenuOpen(false)}>
               Settings
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <Link href="/">
+        <Link href="/" passHref>
           <DropdownMenuItem>
             Log out
           </DropdownMenuItem>
